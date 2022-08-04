@@ -17,4 +17,4 @@ default = []
 
 [dependencies]
 anchor-lang = "0.24.2"
-optifi-cpi = { path = "../optifi-cpi", features = ["cpi"]}
+optifi-cpi = "0.1.1"
