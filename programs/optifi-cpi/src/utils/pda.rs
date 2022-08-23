@@ -50,6 +50,8 @@ pub const PREFIX_MM_LIQUIDITY_AUTH: &str = "mm_liquidity_auth";
 /// used to derive margin stress account address
 pub const PREFIX_MARGIN_STRESS: &str = "margin_stress";
 
+pub const FEE_ACCOUNT: &str = "fee_account";
+
 /// get the user account pda and its bump seed
 pub fn get_user_account_pda(
     optifi_exchange: &Pubkey,

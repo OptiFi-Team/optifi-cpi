@@ -75,3 +75,6 @@ pub const HEALTHY_RATIO: f64 = 1.3;
 // Constant for market maker (mm)
 pub const FEE_SHARE: f64 = 0.5;
 pub const MM_REQ: f64 = 0.1; // MM balance threshold
+
+// Margin stress result timeout tolerance in seconds
+pub const MS_TIMEOUT_TOLERANCE: u64 = 20;

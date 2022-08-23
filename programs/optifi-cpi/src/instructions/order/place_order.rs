@@ -7,7 +7,7 @@ pub struct PlaceOrderContext<'info> {
     pub optifi_exchange: Box<Account<'info, Exchange>>,
     #[account(
         constraint = margin_stress_account.optifi_exchange == optifi_exchange.key(),
-        constraint = margin_stress_account.state == MarginStressState::Available @ OptifiErrorCode::WrongState
+        constraint = !margin_stress_account.is_timeout() @ OptifiErrorCode::TimeOut,
     )]
     pub margin_stress_account: Box<Account<'info, MarginStressAccount>>,
     /// the user's wallet
@@ -16,9 +16,10 @@ pub struct PlaceOrderContext<'info> {
     /// user's optifi account
     #[account(mut,
         has_one = optifi_exchange,
-        constraint = user_account.owner == user.key() @OptifiErrorCode::UnauthorizedAccount,
+        constraint = user_account.owner == user.key() || user_account.delegatee == Some(user.key()) @OptifiErrorCode::UnauthorizedAccount,
         constraint = !user_account.is_in_liquidation @ OptifiErrorCode::CannotPlaceOrdersInLiquidation,
         constraint = !user_account.is_market_maker @ OptifiErrorCode::UserIsMarketMaker,
+        has_one = fee_account.key()
     )]
     pub user_account: Box<Account<'info, UserAccount>>,
     /// user's margin account which is controlled by a pda
@@ -34,7 +35,7 @@ pub struct PlaceOrderContext<'info> {
     #[account(mut, constraint = accessor::authority(&user_instrument_short_token_vault)? == user_account.key() @ OptifiErrorCode::UnauthorizedTokenVault)]
     pub user_instrument_short_token_vault: AccountInfo<'info>,
     /// optifi market that binds an instrument with a serum market(orderbook)
-    /// it's also the mint authority of the instrument spl token
+    #[account(has_one = serum_market)]
     pub optifi_market: Box<Account<'info, OptifiMarket>>,
     /// the serum market(orderbook)
     #[account(mut)]
@@ -60,8 +61,6 @@ pub struct PlaceOrderContext<'info> {
     /// The vault for the "quote" currency
     #[account(mut)]
     pub pc_vault: AccountInfo<'info>,
-    /// serum market vault owner (pda)
-    pub vault_signer: AccountInfo<'info>,
     /// the mint authoriity of both long and short spl tokens
     pub instrument_token_mint_authority_pda: AccountInfo<'info>,
     #[account(
@@ -76,4 +75,9 @@ pub struct PlaceOrderContext<'info> {
     #[account(address = token::ID)]
     pub token_program: AccountInfo<'info>,
     pub rent: Sysvar<'info, Rent>,
+    #[account(
+        mut,
+        has_one = user_account.key()
+    )]
+    pub fee_account: Box<Account<'info, FeeAccount>>,
 }

@@ -26,7 +26,7 @@ pub struct OrderSettlement<'info> {
     pub pc_vault: AccountInfo<'info>,
 
     #[account(mut)]
-    pub instrument_long_spl_token_mint: AccountInfo<'info>,
+    pub instrument_long_spl_token_mint: Box<Account<'info, Mint>>,
     #[account(mut)]
     pub instrument_short_spl_token_mint: AccountInfo<'info>,
     #[account(mut, constraint = accessor::authority(&user_instrument_long_token_vault)? == user_account.key() @ OptifiErrorCode::UnauthorizedTokenVault)]
@@ -53,4 +53,9 @@ pub struct OrderSettlement<'info> {
     pub bids: AccountInfo<'info>,
     #[account(mut)]
     pub asks: AccountInfo<'info>,
+    #[account(
+        mut,
+        has_one = user_account.key()
+    )]
+    pub fee_account: Box<Account<'info, FeeAccount>>,
 }

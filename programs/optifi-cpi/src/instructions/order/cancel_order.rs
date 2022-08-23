@@ -5,12 +5,18 @@ use crate::prelude::*;
 pub struct CancelOrderContext<'info> {
     /// optifi_exchange account
     pub optifi_exchange: Box<Account<'info, Exchange>>,
+    #[account(
+        constraint = margin_stress_account.optifi_exchange == optifi_exchange.key(),
+        constraint = !margin_stress_account.is_timeout() @ OptifiErrorCode::TimeOut,
+    )]
+    pub margin_stress_account: Box<Account<'info, MarginStressAccount>>,
     /// the user's wallet
     pub user: Signer<'info>,
     /// user's optifi account
     #[account(mut,
         has_one = optifi_exchange,
-        constraint = user_account.owner == user.key() @OptifiErrorCode::UnauthorizedAccount,
+        constraint = user_account.owner == user.key() || user_account.delegatee == Some(user.key()) @OptifiErrorCode::UnauthorizedAccount,
+        constraint = !user_account.is_market_maker @ OptifiErrorCode::UserIsMarketMaker,
     )]
     pub user_account: Box<Account<'info, UserAccount>>,
     /// user's margin account which is controlled by a pda
@@ -34,4 +40,9 @@ pub struct CancelOrderContext<'info> {
     pub serum_dex_program_id: AccountInfo<'info>,
     #[account(address = token::ID)]
     pub token_program: AccountInfo<'info>,
+    #[account(
+        mut,
+        has_one = user_account.key()
+    )]
+    pub fee_account: Box<Account<'info, FeeAccount>>,
 }

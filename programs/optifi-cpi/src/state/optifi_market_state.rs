@@ -17,6 +17,8 @@ pub struct OptifiMarket {
     pub is_stopped: bool,
     /// bump seed which is used to generate this optifi market address
     pub bump: u8,
+    /// settle price in expired (in f_to_u_repr)
+    pub settle_price: Option<u64>,
 }
 
 impl OptifiMarket {

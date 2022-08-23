@@ -56,10 +56,12 @@ pub struct UserAccount {
     pub trading_value: u64, // 8 bytes
 
     /// user's total deposit
-    pub total_deposit: u64,
+    pub total_deposit: u64, // 8 bytes
 
-    /// The delegation of this account.
-    pub delegation: Option<Pubkey>, // 32+1 bytes
+    /// the delegatee of this account.
+    pub delegatee: Option<Pubkey>, // 32+1 bytes
+
+    pub fee_account: Pubkey, // 32 bytes
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, AnchorSerialize, AnchorDeserialize)]

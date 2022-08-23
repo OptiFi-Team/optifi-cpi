@@ -1,7 +1,7 @@
 use crate::prelude::*;
 
 #[account]
-#[derive(Default)]
+#[derive(Default, Debug)]
 pub struct MarginStressAccount {
     /// optifi exchange which the MarginStress belongs to
     pub optifi_exchange: Pubkey,
@@ -31,7 +31,7 @@ pub struct MarginStressAccount {
     pub option_price_delta_in_stress_price: Vec<Vec<i64>>,
 }
 
-#[derive(Clone, Copy, PartialEq, Eq, AnchorDeserialize, AnchorSerialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, AnchorDeserialize, AnchorSerialize)]
 pub enum MarginStressState {
     Sync,
     Calculate,
@@ -48,5 +48,12 @@ impl MarginStressAccount {
     /// calc the space to be allocated
     pub fn get_space_allocation() -> usize {
         3000
+    }
+
+    // check if the data in ms account is timeout
+    pub fn is_timeout(&self) -> bool {
+        let ms_time = self.timestamp;
+        let now = Clock::get().unwrap().unix_timestamp as u64;
+        now - ms_time > MS_TIMEOUT_TOLERANCE
     }
 }

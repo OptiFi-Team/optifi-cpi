@@ -380,4 +380,8 @@ pub mod optifi_cpi {
     pub fn set_delegation(ctx: Context<SetDelegation>, delegatee: Option<Pubkey>) -> Result<()> {
         Ok(())
     }
+
+    pub fn initialize_fee_account(ctx: Context<InitializeFeeAccount>) -> Result<()> {
+        Ok(())
+    }
 }
