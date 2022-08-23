@@ -1,12 +1,12 @@
 [package]
 name = "optifi-cpi"
-version = "0.1.1"
+version = "0.1.2"
 description = "Interface for OptiFi Program"
 edition = "2021"
 authors = ["Wayne Kuo <wayne@optifi.app>"]
 homepage = "https://www.optifi.app/"
 repository = "https://github.com/OptiFi-Team/optifi-cpi"
-keywords = ["solana", "optifi", "cpi", "program"]
+keywords = ["solana", "optifi", "cpi", "trading", "option"]
 license = "Apache-2.0"
 
 [lib]
