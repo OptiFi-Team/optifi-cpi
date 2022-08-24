@@ -1,6 +1,6 @@
 [package]
 name = "optifi-cpi"
-version = "0.1.2"
+version = "0.2.1"
 description = "Interface for OptiFi Program"
 edition = "2021"
 authors = ["Wayne Kuo <wayne@optifi.app>"]

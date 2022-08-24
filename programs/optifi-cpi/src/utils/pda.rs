@@ -156,6 +156,21 @@ pub fn get_user_liquidation_account_pda(
     )
 }
 
+pub fn get_user_fee_account_pda(
+    optifi_exchange: &Pubkey,
+    user_account: &Pubkey,
+    program_id: &Pubkey,
+) -> (Pubkey, u8) {
+    Pubkey::find_program_address(
+        &[
+            FEE_ACCOUNT.as_bytes(),
+            optifi_exchange.key().as_ref(),
+            user_account.key().as_ref(),
+        ],
+        program_id,
+    )
+}
+
 pub fn get_serum_open_orders_account(
     optifi_exchange: &Pubkey,
     user_account: &Pubkey,
