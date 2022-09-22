@@ -1,11 +1,11 @@
 [features]
 seeds = false
 
-[programs]
-optifi_cpi = "optFiKjQpoQ3PvacwnFWaPUAqXCETMJSz2sz8HwPe9B"
+[programs.mainnet]
+optifi_cpi = "optF8UCDznwL6mJ2UPF4jnHaHbJe5g9RY8CaU846noM"
 
 [programs.devnet]
-optifi_cpi = "DeVoPfWrDn2UTA1MbSfagvpQxA91MpNFQnhHRw19dK34"
+optifi_cpi = "opDV2tLVsRPGk9aYqm4gdtGotiRwjuYKUmWzWB7NfCR"
 
 [registry]
 url = "https://anchor.projectserum.com"

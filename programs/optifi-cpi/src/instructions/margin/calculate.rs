@@ -11,5 +11,4 @@ pub struct CalculateMarginStressContext<'info> {
     // Oracle to get the spot price
     pub asset_feed: AccountInfo<'info>,
     pub usdc_feed: AccountInfo<'info>,
-    pub iv_feed: AccountInfo<'info>,
 }

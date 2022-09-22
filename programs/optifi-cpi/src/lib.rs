@@ -6,10 +6,10 @@ pub mod state;
 pub mod utils;
 
 #[cfg(not(feature = "devnet"))]
-declare_id!("optFiKjQpoQ3PvacwnFWaPUAqXCETMJSz2sz8HwPe9B");
+declare_id!("optF8UCDznwL6mJ2UPF4jnHaHbJe5g9RY8CaU846noM");
 
 #[cfg(feature = "devnet")]
-declare_id!("DeVoPfWrDn2UTA1MbSfagvpQxA91MpNFQnhHRw19dK34");
+declare_id!("opDV2tLVsRPGk9aYqm4gdtGotiRwjuYKUmWzWB7NfCR");
 
 pub mod prelude {
     pub use crate::constants::*;
@@ -138,6 +138,10 @@ pub mod optifi_cpi {
     }
 
     pub fn settle_order_funds(ctx: Context<OrderSettlement>) -> Result<()> {
+        Ok(())
+    }
+
+    pub fn consume_event_queue(ctx: Context<ConsumeEventQueue>, limit: Option<u16>) -> Result<()> {
         Ok(())
     }
 
@@ -281,6 +285,10 @@ pub mod optifi_cpi {
         Ok(())
     }
 
+    pub fn update_iv(ctx: Context<UpdateIv>, iv: f64, timestamp: u64) -> Result<()> {
+        Ok(())
+    }
+
     ////// Liquidation //////
     pub fn init_liquidation(ctx: Context<InitializeLiquidation>) -> Result<()> {
         Ok(())
@@ -350,6 +358,20 @@ pub mod optifi_cpi {
     pub fn update_exchange_authority(
         ctx: Context<UpdateExchangeAuthority>,
         new_authority: Pubkey,
+    ) -> Result<()> {
+        Ok(())
+    }
+
+    pub fn update_operation_authority(
+        ctx: Context<UpdateOperationAuthority>,
+        new_operation_authority: Pubkey,
+    ) -> Result<()> {
+        Ok(())
+    }
+
+    pub fn update_iv_authority(
+        ctx: Context<UpdateIvAuthority>,
+        new_iv_authority: Pubkey,
     ) -> Result<()> {
         Ok(())
     }

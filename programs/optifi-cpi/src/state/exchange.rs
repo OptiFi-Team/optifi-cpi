@@ -1,7 +1,7 @@
 use crate::prelude::*;
 
 #[account]
-#[derive(Default, Debug)]
+#[derive(Default)]
 pub struct Exchange {
     /// id of the OptiFi Exchange
     pub uuid: String,
@@ -31,6 +31,12 @@ pub struct Exchange {
 
     /// user deposit limit
     pub user_deposit_limit: Option<u64>,
+
+    /// operation authority address
+    pub operation_authority: Pubkey,
+
+    /// iv authority address
+    pub iv_authority: Pubkey,
 }
 
 impl Exchange {
