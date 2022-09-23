@@ -1,7 +1,7 @@
 use crate::prelude::*;
 
 #[account]
-#[derive(Default)]
+#[derive(Default, Debug)]
 pub struct Exchange {
     /// id of the OptiFi Exchange
     pub uuid: String,
