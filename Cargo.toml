@@ -1,6 +1,7 @@
 [workspace]
 members = [
-    "programs/optifi-cpi"
+    "programs/optifi-cpi",
+    "programs/optifi-usdc-cpi"
 ]
 
 [profile.release]

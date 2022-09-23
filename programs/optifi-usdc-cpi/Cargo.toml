@@ -1,0 +1,20 @@
+[package]
+name = "optifi-usdc-cpi"
+version = "0.1.0"
+edition = "2021"
+license = "Apache-2.0"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[features]
+default = ["cpi"]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+cpi = ["no-entrypoint"]
+devnet = ["no-entrypoint"]
+
+
+[dependencies]
+anchor-gen = "0.3.0"
+anchor-lang = ">=0.20"
