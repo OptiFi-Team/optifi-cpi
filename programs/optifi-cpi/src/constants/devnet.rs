@@ -16,7 +16,7 @@ pub const MANGO_PROGRAM_ID: &str = "4skJ85cdxQAFVKbcGgfun8iZPL7BadVYXG3kGEGkufqA
 // AMM
 pub const AMM_WITHDRAW_WAITING_TIME: u64 = 60 * 10; // 10 mins in seconds
 
-pub const OPTIFI_EXCHANGE: &str = "6JWqQ2KYbBChMXZLvTgB9hdtCPDy9P4gpTh9hCdNxVmP";
+pub const OPTIFI_EXCHANGE: &str = "EFvhNA6C6Dd9CaGHoeyBPFHpHBYjmSyuxJ8WN8FjVTRp";
 pub const USDC_TOKEN_MINT: &str = "8FRFC6MoGGkMFQwngccyu69VnYbzykGeez7ignHVAFSN";
 
 pub const SERUM_DEX_PROGRAM_ID: &str = "DESVgJVGajEgKGXhb6XmqDHGz3VjdgP7rEVESBgxmroY";
