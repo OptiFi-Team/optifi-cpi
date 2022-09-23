@@ -46,16 +46,18 @@ pub struct OrderSettlement<'info> {
     pub serum_dex_program_id: AccountInfo<'info>,
 
     #[account(mut)]
-    pub request_queue: AccountInfo<'info>,
-    #[account(mut)]
     pub event_queue: AccountInfo<'info>,
-    #[account(mut)]
-    pub bids: AccountInfo<'info>,
-    #[account(mut)]
-    pub asks: AccountInfo<'info>,
+
+    pub consume_events_authority: AccountInfo<'info>,
+
     #[account(
         mut,
-        has_one = user_account.key()
+        seeds=[
+            FEE_ACCOUNT.as_bytes(),
+            optifi_exchange.key().as_ref(),
+            user_account.key().as_ref()
+        ], 
+        bump
     )]
     pub fee_account: Box<Account<'info, FeeAccount>>,
 }

@@ -19,7 +19,6 @@ pub struct PlaceOrderContext<'info> {
         constraint = user_account.owner == user.key() || user_account.delegatee == Some(user.key()) @OptifiErrorCode::UnauthorizedAccount,
         constraint = !user_account.is_in_liquidation @ OptifiErrorCode::CannotPlaceOrdersInLiquidation,
         constraint = !user_account.is_market_maker @ OptifiErrorCode::UserIsMarketMaker,
-        has_one = fee_account.key()
     )]
     pub user_account: Box<Account<'info, UserAccount>>,
     /// user's margin account which is controlled by a pda
@@ -77,7 +76,12 @@ pub struct PlaceOrderContext<'info> {
     pub rent: Sysvar<'info, Rent>,
     #[account(
         mut,
-        has_one = user_account.key()
+        seeds=[
+            FEE_ACCOUNT.as_bytes(),
+            optifi_exchange.key().as_ref(),
+            user_account.key().as_ref()
+        ], 
+        bump
     )]
     pub fee_account: Box<Account<'info, FeeAccount>>,
 }
