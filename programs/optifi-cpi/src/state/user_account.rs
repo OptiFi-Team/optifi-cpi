@@ -107,7 +107,7 @@ pub struct TempPnL {
 #[derive(Default, Clone, Copy, Debug, PartialEq, AnchorSerialize, AnchorDeserialize)]
 pub struct UserAmmEquity {
     // notioanl withdrawable usdc tokens
-    pub notioanl_withdrawable: u64,
+    pub notional_withdrawable: u64,
     // total lp token amount in withdraw queue
     pub lp_amount_in_queue: u64,
 }

@@ -4,7 +4,10 @@ use crate::prelude::*;
 pub struct LiquidationToAmm<'info> {
     pub optifi_exchange: Box<Account<'info, Exchange>>,
 
-    #[account(constraint = margin_stress_account.optifi_exchange == optifi_exchange.key())]
+    #[account(
+        constraint = margin_stress_account.optifi_exchange == optifi_exchange.key(),
+        constraint = !margin_stress_account.is_timeout() @ OptifiErrorCode::TimeOut
+    )]
     pub margin_stress_account: Box<Account<'info, MarginStressAccount>>,
 
     #[account(mut, constraint=user_account.is_in_liquidation)]
@@ -18,8 +21,10 @@ pub struct LiquidationToAmm<'info> {
     )]
     pub liquidation_state: Account<'info, LiquidationState>,
 
+    #[account(mut)]
     pub user_instrument_long_token_vault: AccountInfo<'info>,
 
+    #[account(mut)]
     pub user_instrument_short_token_vault: AccountInfo<'info>,
 
     pub optifi_market: Box<Account<'info, OptifiMarket>>,

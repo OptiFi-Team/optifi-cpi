@@ -31,10 +31,14 @@ pub struct InitializeUserAccount<'info> {
         bump,
         space=LiquidationState::get_space_allocation()
     )]
-    pub liquidation_account: Account<'info, LiquidationState>,
+    pub liquidation_account: Box<Account<'info, LiquidationState>>,
     /// the margin account into which user will deposits spl token
-    #[account(mut, constraint= !user_margin_account_usdc.data_is_empty() && user_margin_account_usdc.lamports() > 0)]
-    pub user_margin_account_usdc: AccountInfo<'info>,
+    #[account(
+        mut, 
+        token::mint = optifi_exchange.usdc_mint,
+        token::authority = user_account,
+    )]
+    pub user_margin_account_usdc: Box<Account<'info, TokenAccount>>,
     /// owner of the user account
     #[account(signer, constraint= owner.data_is_empty() && owner.lamports() > 0)]
     pub owner: AccountInfo<'info>,

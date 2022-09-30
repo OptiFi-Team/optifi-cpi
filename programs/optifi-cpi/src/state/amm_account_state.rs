@@ -21,22 +21,26 @@ pub struct AmmAccount {
     /// a list of pubkeys of the instruments AMM will trade
     pub trading_instruments: Vec<Pubkey>,
     /// a list of Position struct by instruments
+    // pub positions: [Position; (STRIKES + BACKUP_STRIKES) as usize * 2],
     pub positions: Vec<Position>,
     /// a list of proposals of orders to excute for each instrument
+    // pub proposals: [Proposal; (STRIKES + BACKUP_STRIKES) as usize * 2],
     pub proposals: Vec<Proposal>,
     /// amm's state indicator
     pub state: AmmState,
+    /// each instrument's state flag under the current AMM state
+    // pub flags: [bool; (STRIKES + BACKUP_STRIKES) as usize * 2],
     /// the first flag is for future, while remaining flags for options
     pub flags: Vec<bool>,
     /// the implied volatility
     pub iv: u64,
-    /// the underlying asset price based on USDC
+    /// the underlying asset price denominated in USDC
     pub price: u64,
-    /// the net delta
+    /// the net delta denominated in underlying asset
     pub net_delta: i64,
     /// the timestamp when lastest update
     pub timestamp: u64,
-    /// the amm total liquidity based on USDC (with 6 decimals)
+    /// the amm total liquidity denominated in USDC (with 6 decimals)
     pub total_liquidity_usdc: u64,
     /// the duration type (Weekly/Monthly)
     pub duration: Duration,
@@ -44,9 +48,8 @@ pub struct AmmAccount {
     pub expiry_date: u64,
     /// the contract size *10000 (f_to_u_repr)
     pub contract_size: u64,
-
+    /// client order id counter for amm placing orders
     pub client_order_id_counter: u64,
-
     /// amm's mango account for hedging on mango market
     pub amm_mango_account: Pubkey,
     /// is mango hedging needed
@@ -55,7 +58,7 @@ pub struct AmmAccount {
     pub is_hedge_in_progress: bool,
     /// temp PnL record for fund settlment purpose
     pub temp_pnl: TempPnL, // 16 bytes
-
+    /// pubkey of amm's withdraw queue
     pub withdraw_queue: Pubkey,
 }
 

@@ -45,11 +45,6 @@ pub struct OrderSettlement<'info> {
 
     pub serum_dex_program_id: AccountInfo<'info>,
 
-    #[account(mut)]
-    pub event_queue: AccountInfo<'info>,
-
-    pub consume_events_authority: AccountInfo<'info>,
-
     #[account(
         mut,
         seeds=[

@@ -6,7 +6,7 @@ pub struct MmCalculationContext<'info> {
 
     #[account(
         constraint = margin_stress_account.optifi_exchange == optifi_exchange.key(),
-        constraint = margin_stress_account.state == MarginStressState::Available @ OptifiErrorCode::WrongState
+        constraint = !margin_stress_account.is_timeout() @ OptifiErrorCode::TimeOut,
     )]
     pub margin_stress_account: Box<Account<'info, MarginStressAccount>>,
     
@@ -32,9 +32,6 @@ pub struct MmCalculationContext<'info> {
 
     #[account(mut)]
     pub open_orders: AccountInfo<'info>,
-
-    #[account(mut)]
-    pub event_queue: AccountInfo<'info>,
 
     #[account(mut)]
     pub user_instrument_long_token_vault: AccountInfo<'info>,
