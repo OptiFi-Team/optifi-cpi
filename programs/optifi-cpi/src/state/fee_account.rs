@@ -1,7 +1,6 @@
 use crate::prelude::*;
 
 #[account]
-#[derive(Debug)]
 pub struct FeeAccount {
     pub user_account: Pubkey,         // 32
     pub fee_tier: FeeTier,            // 1
@@ -10,6 +9,8 @@ pub struct FeeAccount {
     pub referrer: Option<Pubkey>,     // 33
     pub acc_rebate_fee: u64,          // 8
     pub open_order_fee: Vec<FeeLog>,  // 32 * 300
+    pub referree_num: u64,
+    pub weekly_log: [WeeklyLog; WEEKLY_LOG_LEN],
 }
 
 #[derive(Debug, Copy, Clone, AnchorSerialize, AnchorDeserialize, PartialEq)]
@@ -18,6 +19,13 @@ pub struct FeeLog {
     pub fee: u64,             // 8
     pub client_order_id: u64, // 8
     pub spot_price: u64,      // 8
+}
+
+#[derive(Default, Debug, Copy, Clone, AnchorSerialize, AnchorDeserialize, PartialEq)]
+pub struct WeeklyLog {
+    pub expiry_date: u64,
+    pub weekly_acc_fee: u64,
+    pub weekly_notional_trading_volume: u64,
 }
 
 impl FeeAccount {
@@ -33,4 +41,6 @@ pub enum FeeTier {
     Level1,
     Level2,
     Level3,
+    Level4,
+    Level5,
 }

@@ -78,3 +78,6 @@ pub const MM_REQ: f64 = 0.1; // MM balance threshold
 
 // Margin stress result timeout tolerance in seconds
 pub const MS_TIMEOUT_TOLERANCE: u64 = 20;
+
+// Weekly Fee Log
+pub const WEEKLY_LOG_LEN: usize = 4;
