@@ -81,3 +81,7 @@ pub const MS_TIMEOUT_TOLERANCE: u64 = 20;
 
 // Weekly Fee Log
 pub const WEEKLY_LOG_LEN: usize = 4;
+
+// SERUM FEE
+pub const SERUM_TAKER_FEE: f64 = 0.0004;
+pub const SERUM_MAKER_FEE: f64 = 0.0;
