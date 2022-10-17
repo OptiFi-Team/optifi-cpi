@@ -1,6 +1,7 @@
 use crate::prelude::*;
 
 #[account]
+#[derive(Debug)]
 pub struct FeeAccount {
     pub user_account: Pubkey,         // 32
     pub fee_tier: FeeTier,            // 1
