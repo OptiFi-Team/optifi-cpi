@@ -37,6 +37,9 @@ pub struct Exchange {
 
     /// iv authority address
     pub iv_authority: Pubkey,
+
+    // total delivery fee charged by exchange
+    pub delivery_fee: u64,
 }
 
 impl Exchange {
@@ -118,6 +121,10 @@ pub struct InstrumentCommon {
     pub expiry_date: u64, // 8 bytes
 
     pub expiry_type: ExpiryType, // 1 byte
+    // settle price for the instrument group with same expiry date
+    pub settle_price: Option<u64>,
+    // a flag indicating if all the instruments in the group are settled
+    pub all_settled: bool,
 }
 
 /// keep the unique data for an instrument
